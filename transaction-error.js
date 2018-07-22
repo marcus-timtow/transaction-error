@@ -37,7 +37,7 @@
             details = msg;
             msg = undefined;
         }
-        this.message = msg || (err && err.msg) || "error";
+        this.message = msg || (err && err.message) || "error";
 
         if (typeof details === "number") {
             details = {status: details};
