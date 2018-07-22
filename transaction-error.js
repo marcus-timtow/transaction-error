@@ -23,7 +23,7 @@
      * @extends Error
      * 
      * @argument {Error} [err]
-     * @argument {string} msg
+     * @argument {string} [msg]
      * @argument {object|number} [details]
      * @argument {number} [details.status] HTTP response status
      */
@@ -32,9 +32,12 @@
         if (typeof err === "string") {
             details = msg;
             msg = err;
-            err = null;
+            err = undefined;
+        } else if (typeof msg !== "string"){
+            details = msg;
+            msg = undefined;
         }
-        this.message = msg;
+        this.message = msg || (err && err.msg) || "error";
 
         if (typeof details === "number") {
             details = {status: details};
